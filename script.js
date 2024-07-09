@@ -66,14 +66,31 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Example data
-    const input = [1, 0, 1];
-    const expectedOutput = [1];
+    // Event listener for the Train button
+    document.getElementById('trainButton').addEventListener('click', function() {
+        const input = [
+            parseFloat(document.getElementById('inputValue1').value),
+            parseFloat(document.getElementById('inputValue2').value),
+            parseFloat(document.getElementById('inputValue3').value)
+        ];
+        const expectedOutput = [1]; // You can change this to the desired output
 
-    // Train the network
-    train(input, expectedOutput, 1000);
+        // Train the network
+        train(input, expectedOutput, 1000);
 
-    // Test the network
-    const result = forwardPropagation(input).output;
-    console.log("Output after training:", result);
+        alert("Training complete");
+    });
+
+    // Event listener for the Predict button
+    document.getElementById('predictButton').addEventListener('click', function() {
+        const input = [
+            parseFloat(document.getElementById('inputValue1').value),
+            parseFloat(document.getElementById('inputValue2').value),
+            parseFloat(document.getElementById('inputValue3').value)
+        ];
+
+        // Predict the output
+        const result = forwardPropagation(input).output;
+        document.getElementById('result').innerText = `Output: ${result}`;
+    });
 });
