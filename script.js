@@ -14,11 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Activation function (ReLU)
     function relu(x) {
+        if (!Array.isArray(x)) {
+            x = [x];
+        }
         return x.map(value => Math.max(0, value));
     }
 
     // Derivative of ReLU
     function reluDerivative(x) {
+        if (!Array.isArray(x)) {
+            x = [x];
+        }
         return x.map(value => (value > 0 ? 1 : 0));
     }
 
@@ -41,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function backwardPropagation(input, hiddenOutput, output, expectedOutput) {
         const outputError = output.map((out, i) => expectedOutput[i] - out);
         const hiddenError = hiddenOutput.map((hiddenOut, i) => 
-            reluDerivative([hiddenOut])[0] * weights2[i].reduce((sum, weight, j) => sum + outputError[j] * weight, 0)
+            reluDerivative(hiddenOut)[0] * weights2[i].reduce((sum, weight, j) => sum + outputError[j] * weight, 0)
         );
 
         // Update weights (using a learning rate)
