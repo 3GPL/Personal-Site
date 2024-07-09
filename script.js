@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Forward propagation
     function forwardPropagation(input) {
-        const hiddenInput = input.map((inp, i) => 
-            weights1[i].reduce((sum, weight, j) => sum + inp * weight, 0)
+        const hiddenInput = weights1[0].map((_, j) => 
+            input.reduce((sum, inp, i) => sum + inp * weights1[i][j], 0)
         );
         const hiddenOutput = relu(hiddenInput);
-        
-        const finalInput = hiddenOutput.map((hiddenOut, i) => 
-            weights2[i].reduce((sum, weight, j) => sum + hiddenOut * weight, 0)
+
+        const finalInput = weights2[0].map((_, j) => 
+            hiddenOutput.reduce((sum, hiddenOut, i) => sum + hiddenOut * weights2[i][j], 0)
         );
         const output = relu(finalInput);
 
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function backwardPropagation(input, hiddenOutput, output, expectedOutput) {
         const outputError = output.map((out, i) => expectedOutput[i] - out);
         const hiddenError = hiddenOutput.map((hiddenOut, i) => 
-            reluDerivative(hiddenOut) * weights2[i].reduce((sum, weight, j) => sum + outputError[j] * weight, 0)
+            reluDerivative([hiddenOut])[0] * weights2[i].reduce((sum, weight, j) => sum + outputError[j] * weight, 0)
         );
 
         // Update weights (using a learning rate)
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for the Train button
     document.getElementById('trainButton').addEventListener('click', function() {
         const input = [
-            parseFloat(document.getElementById('inputValue1').value),
-            parseFloat(document.getElementById('inputValue2').value),
-            parseFloat(document.getElementById('inputValue3').value)
+            parseFloat(document.getElementById('inputValue1').value) || 0,
+            parseFloat(document.getElementById('inputValue2').value) || 0,
+            parseFloat(document.getElementById('inputValue3').value) || 0
         ];
         const expectedOutput = [1]; // You can change this to the desired output
 
@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for the Predict button
     document.getElementById('predictButton').addEventListener('click', function() {
         const input = [
-            parseFloat(document.getElementById('inputValue1').value),
-            parseFloat(document.getElementById('inputValue2').value),
-            parseFloat(document.getElementById('inputValue3').value)
+            parseFloat(document.getElementById('inputValue1').value) || 0,
+            parseFloat(document.getElementById('inputValue2').value) || 0,
+            parseFloat(document.getElementById('inputValue3').value) || 0
         ];
 
         // Predict the output
