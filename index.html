@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Network Visualization</title>
+    <title>Simple Neural Network Visualization</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="network">
         <div class="layer">
-            <div class="node">Input 1</div>
-            <div class="node">Input 2</div>
-            <div class="node">Input 3</div>
+            <div class="node" id="input1">Input 1</div>
+            <div class="node" id="input2">Input 2</div>
+            <div class="node" id="input3">Input 3</div>
         </div>
         <div class="layer">
-            <div class="node">Hidden 1</div>
-            <div class="node">Hidden 2</div>
-            <div class="node">Hidden 3</div>
+            <div class="node" id="hidden1">Hidden 1</div>
+            <div class="node" id="hidden2">Hidden 2</div>
+            <div class="node" id="hidden3">Hidden 3</div>
         </div>
         <div class="layer">
-            <div class="node">Output</div>
+            <div class="node" id="output">Output</div>
         </div>
     </div>
 </body>
